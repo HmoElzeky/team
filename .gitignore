@@ -1,52 +1,74 @@
-# Prerequisites
-*.d
+#include <stdio.h>                                  //* PRSONAL FINANCE MANAGEMENT TOOL //
+char category[40];
+// Function to add income
+float addIncome(float income)
+{
+    float amount;
 
-# Object files
-*.o
-*.ko
-*.obj
-*.elf
+    printf("Enter income amount: ");
+    scanf("%f", &amount);
+    return income + amount;
+}
 
-# Linker output
-*.ilk
-*.map
-*.exp
+// Function to add expense
+float addExpense(float balance)
+{
+    float amount;
 
-# Precompiled Headers
-*.gch
-*.pch
+    printf("Enter expense amount: ");
+    scanf("%f", &amount);
+    return balance - amount;
+}
 
-# Libraries
-*.lib
-*.a
-*.la
-*.lo
+// Function to display balance
+int displayBalance(float balance)
+{
+    printf("Current balance: $%.2f\n", balance);
+}
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-*.so.*
-*.dylib
+int main()
+{
+    float balance = 0;
+    int choice;
 
-# Executables
-*.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+    while (1)
+    {
+        printf("\nUniversity Finance Management Tool\n");
+        printf("1. Add Income\n");
+        printf("======================\n");
+        printf("2. Add Expense\n");
+        printf("======================\n");
+        printf("3. Display Balance\n");
+        printf("======================\n");
+        printf("4. Quit\n");
+        printf("======================\n");
 
-# Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
 
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
+        switch (choice)
+        {
+        case 1:
+            balance = addIncome(balance);
+            break;
+        case 2:
+            balance = addExpense(balance);
+            break;
+        case 3:
+            printf("Enter expense category: ");
+            scanf("%s", category);
+            printf(" is %s  ", category);
+
+            displayBalance(balance);
+
+            break;
+        case 4:
+            printf("Exiting...\n");
+            return 0;
+        default:
+            printf("Invalid choice. Please try again.\n");
+        }
+    }
+
+    return 0;
+}
