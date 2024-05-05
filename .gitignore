@@ -1,7 +1,6 @@
-#include <stdio.h>                                          //* PRSONAL FINANCE MANAGEMENT TOOL //
-char category[40];
-float numbof;
-float x, c, x3 = 43000, xm = 93000, z, income, amount, cou3 = 38000, cou8 = 75000;
+#include <stdio.h>                                //* PRSONAL FINANCE MANAGEMENT TOOL //
+
+float x, c, x3 = 43000, xm = 93000, z, numbof, income, amount, cou3 = 38000, cou8 = 75000;
 // Function to add income
 float addIncome(float income)
 {
