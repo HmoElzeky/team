@@ -1,5 +1,7 @@
-#include <stdio.h>                                  //* PRSONAL FINANCE MANAGEMENT TOOL //
+#include <stdio.h>                                          //* PRSONAL FINANCE MANAGEMENT TOOL //
 char category[40];
+float numbof;
+float x, c, x3 = 43000, xm = 93000, z, income, amount, cou3 = 38000, cou8 = 75000;
 // Function to add income
 float addIncome(float income)
 {
@@ -10,14 +12,108 @@ float addIncome(float income)
     return income + amount;
 }
 
+// functions of x series
+float x33(float x3) { return amount + x3; }
+float xmm(float xm) { return amount + xm; }
+
+float xseries(float x)
+{
+    float amount;
+    int choice3;
+    printf("1. x3 is 43k$ \n");
+    printf("2. xm is 93k$ \n");
+
+    printf("choice : ");
+    scanf("%i", &choice3);
+    switch (choice3)
+    {
+    case 1:
+        x3 = x33(x3);
+        z = amount + x3;
+        printf("the amount is%f $", z);
+        break;
+    case 2:
+        xm = xmm(xm);
+        z = amount + xm;
+        printf("the amount is%f $", z);
+        break;
+    default:
+        printf("Invalid choice. Please try again.\n");
+        break;
+    }
+    return amount;
+}
+
+// functions of coupe series
+float coup3(float cou3) { return amount + cou3; }
+float coup8(float cou8) { return amount + cou8; }
+
+float coupseries(float c)
+{
+    float amount;
+    int choice3;
+    printf("1. coupe3 is 38k$ \n");
+    printf("2. coupe8 is 75k$ \n");
+
+    printf("choice : ");
+    scanf("%i", &choice3);
+    switch (choice3)
+    {
+    case 1:
+        cou3 = coup3(cou3);
+        z = amount + cou3;
+        printf("the amount is%f $", z);
+        break;
+    case 2:
+        cou8 = coup8(cou8);
+        z = amount + cou8;
+        printf("the amount is%f $", z);
+        break;
+    default:
+        printf("Invalid choice. Please try again.\n");
+        break;
+    }
+    return amount;
+}
+
+// function of income of company
+float addincome2(float balance)
+{
+
+    int choice2;
+
+    printf("1. x sreies (43k$ - 93k$)\n");
+    printf("2. coupe sreies (38k$ - 75k$) \n");
+
+    printf("Enter your choice2: ");
+    scanf("%d", &choice2);
+    switch (choice2)
+    {
+    case 1:
+        x = xseries(x);
+        break;
+    case 2:
+        c = coupseries(c);
+        break;
+
+    default:
+        printf("Invalid choice. Please try again.\n");
+        break;
+    }
+
+    return balance + z;
+}
+
 // Function to add expense
 float addExpense(float balance)
 {
+
     float amount;
 
-    printf("Enter expense amount: ");
-    scanf("%f", &amount);
-    return balance - amount;
+    printf(" enter the expense");
+    scanf(" amount is %f", &amount);
+
+    return balance - (amount + z);
 }
 
 // Function to display balance
@@ -25,48 +121,82 @@ int displayBalance(float balance)
 {
     printf("Current balance: $%.2f\n", balance);
 }
+float numbofe(float ar)
+{
+    printf("1. Add number of Income if you have more than 1\n");
+    scanf(" %f", &numbof);
+}
 
 int main()
 {
     float balance = 0;
     int choice;
 
-    while (1)
+    int choice2;
+
+    printf("1. Add number of Income if you have more than 1\n");
+    scanf(" %f", &numbof);
+
+    if (numbof > 0)
     {
-        printf("\nUniversity Finance Management Tool\n");
-        printf("1. Add Income\n");
-        printf("======================\n");
-        printf("2. Add Expense\n");
-        printf("======================\n");
-        printf("3. Display Balance\n");
-        printf("======================\n");
-        printf("4. Quit\n");
-        printf("======================\n");
 
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-
-        switch (choice)
+        while (1)
         {
-        case 1:
-            balance = addIncome(balance);
-            break;
-        case 2:
-            balance = addExpense(balance);
-            break;
-        case 3:
-            printf("Enter expense category: ");
-            scanf("%s", category);
-            printf(" is %s  ", category);
+            printf("\nUniversity Finance Management Tool\n");
 
-            displayBalance(balance);
+            printf("======================\n");
+            printf("1. Add Income\n");
+            printf("======================\n");
+            printf("2. ADD INCOME IN COMPANY\n");
+            printf("======================\n");
+            printf("3. Add Expense of company\n");
+            printf("======================\n");
+            printf("4. Display Balance\n");
+            printf("======================\n");
+            printf("5. another income\n");
+            printf("======================\n");
+            printf("6. Quit\n");
+            printf("======================\n");
 
-            break;
-        case 4:
-            printf("Exiting...\n");
-            return 0;
-        default:
-            printf("Invalid choice. Please try again.\n");
+            printf("Enter your choice: ");
+            scanf("%d", &choice);
+
+            switch (choice)
+            {
+                // case 1:
+                // balance  = addnumofIncomes(balance);
+                // break;
+            case 1:
+                balance = addIncome(balance);
+                break;
+            case 2:
+                balance = addincome2(balance);
+
+                break;
+            case 3:
+                balance = addExpense(balance);
+                break;
+            case 4:
+
+                displayBalance(balance);
+
+                break;
+            case 5:
+                if (numbof > 1 && numbof < numbof + 1)
+                {
+
+                    printf("the another income \n");
+                }
+                break;
+            case 6:
+                printf("Exiting...\n");
+                return 0;
+
+                break;
+            default:
+                printf("Invalid choice. Please try again.\n");
+                break;
+            }
         }
     }
 
