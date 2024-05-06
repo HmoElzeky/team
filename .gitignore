@@ -1,6 +1,7 @@
 #include <stdio.h>                            //*  APP OF PRSONAL FINANCE MANAGEMENT TOOL //
 
-float x, c, x3 = 43000, xm = 93000, z,r, numbof,balance , income, amount, cou3 = 38000, cou8 = 75000;
+float x, c, x3 = 43000, xm = 93000, z, numbof,balance , income, amount, cou3 = 38000, cou8 = 75000;
+#define MAX_EXPENSES 100
 // Function to add income
 float addIncome(float income)
 {
@@ -82,11 +83,11 @@ float coupseries(float c)
         printf("Invalid choice. Please try again.\n");
         break;
     }
-    return amount;
+    return z;
 }
 
 // function of income of company
-float addincome2(float balance)
+float addincome2(float income)
 {
 
     int choice2;
@@ -109,43 +110,52 @@ float addincome2(float balance)
         printf("Invalid choice. Please try again.\n");
         break;
     }
- r = balance + z;
-    return r;
+ amount =  z;
+    return income + amount ;
 
 }
 
-// Function to add expense
-float addExpense(float balance)
-{
+void addExpense(float *expenses,  int *numExpenses) {
+  
+    float amount;
+   
+    printf("Enter expense amount: ");
+    scanf("%f", &amount);
+    expenses[*numExpenses] = amount;
+    (*numExpenses)++;
+}
 
-    float amount2;
-
-    printf(" enter the expense : ");
-    scanf(" amount is %f", &amount2);
-    if (amount2>0)
-    {
-        return balance - (amount2 + r +z );
+// Function to calculate total expenses
+float calculateTotalExpenses(float *expenses, int numExpenses , float balance) {
+    float total = 0;
+    for (int i = 0; i < numExpenses; i++) {
+        total += expenses[i];
     }
-    
-else
-{
-      printf(" it is not allowed");
-     return 0; 
-    
+    return total;
 }
 
+// Function to calculate savings
+float calculateSavings(float income, float *expenses, int numExpenses , float balance) {
+    float totalExpenses = calculateTotalExpenses(expenses, numExpenses, balance);
+    return income - totalExpenses;
 }
+
 
 // Function to display balance
-int displayBalance(float balance)
-{
-    printf("Current balance: $%.2f\n", balance);
+void displaySummary(float income, float *expenses,  int numExpenses , float balance) {
+    printf("\nIncome: $%.2f\n", income);
+    printf("Expenses:\n");
+    for (int i = 0; i < numExpenses; i++) {
+        printf("- %s: $%.2f\n",  expenses[i]);
+    }
+    printf("Savings: $%.2f\n", calculateSavings(income, expenses, numExpenses , balance));
 }
-
-int main()
-{
+int main (){
     float balance = 0;
     int choice;
+    float expenses[MAX_EXPENSES];
+      int numExpenses = 0;
+     
 
     printf(" ***** Add number of Income if you have more than 1 ******\n");
     scanf(" %f", &numbof);
@@ -155,7 +165,7 @@ int main()
 
         while (1)
         {
-            printf("\nUniversity Finance Management Tool\n");
+            printf("\nCompany Finance Management Tool\n");
 
             printf("======================\n");
             printf("1. Add Income\n");
@@ -185,11 +195,15 @@ int main()
 
                 break;
             case 3:
-                balance = addExpense(balance);
+              if (numExpenses < MAX_EXPENSES) {
+                    addExpense(expenses,  &numExpenses);
+                } else {
+                    printf("Maximum number of expenses reached.\n");
+                }
                 break;
             case 4:
 
-                displayBalance(balance);
+               displaySummary(balance, expenses, numExpenses, income);
 
                 break;
             case 5:
@@ -203,7 +217,7 @@ int main()
                 printf("Exiting...\n");
                 return 0;
 
-                break;
+              
             default:
                 printf("Invalid choice. Please try again.\n");
                 break;
